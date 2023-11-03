@@ -1,0 +1,281 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-10-15 22:51+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: account/views.py:167
+msgid "The Product has been Added to the Wishlist!"
+msgstr "Məhsul seçilmişlərə əlavə olundu!"
+
+#: core/templates/index.html:58 core/templates/index.html:76
+msgid "welcome to fashion"
+msgstr "modaya xoş gəldiniz"
+
+#: core/templates/index.html:59
+msgid "Men fashion"
+msgstr "Kişi"
+
+#: core/templates/index.html:60 core/templates/index.html:78
+msgid "Shop Now"
+msgstr "İNDİ ALIN"
+
+#: core/templates/index.html:77
+msgid "Women fashion"
+msgstr "Qadın"
+
+#: core/templates/index.html:104 core/templates/index.html:120
+msgid "SAVE"
+msgstr "Qənat edin"
+
+#: core/templates/index.html:105
+msgid "Men"
+msgstr "KİŞİ"
+
+#: core/templates/index.html:121
+msgid "Women"
+msgstr "Qadın"
+
+#: core/templates/index.html:135
+msgid "special offer"
+msgstr "xüsusi təklif"
+
+#: core/templates/index.html:136
+msgid "top collection"
+msgstr "TOP KOLLEKSİYA"
+
+#: core/templates/index.html:142
+msgid ""
+"Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+msgstr "Lorem Ipsum sadəcə çap və çap sənayesinin saxta mətnidir."
+
+#: core/templates/index.html:162 core/templates/index.html:267
+#: core/templates/index.html:329 core/templates/index.html:386
+msgid "NEW"
+msgstr "YENİ"
+
+#: core/templates/index.html:165 core/templates/index.html:270
+#: core/templates/index.html:332 core/templates/index.html:387
+msgid "ON SALE"
+msgstr "ENDİRİMDƏ"
+
+#: core/templates/index.html:232
+msgid "Fashion Trends"
+msgstr "Moda Trend"
+
+#: core/templates/index.html:233
+msgid "Special Offer"
+msgstr "Xüsusi Təklif"
+
+#: core/templates/index.html:245
+msgid "exclusive products"
+msgstr "eksklüziv məhsullar"
+
+#: core/templates/index.html:246
+msgid "Special Products"
+msgstr "XÜSUSİ MƏHSULLAR"
+
+#: core/templates/index.html:254
+msgid "New Products"
+msgstr "Yeni Məhsullar"
+
+#: core/templates/index.html:255
+msgid "Featured Products"
+msgstr "Seçilmiş Məhsullar"
+
+#: core/templates/index.html:256
+msgid "Best Sellers"
+msgstr "Ən Çox Satılan"
+
+#: core/templates/index.html:710 product/templates/product-page.html:67
+msgid "free shipping"
+msgstr "Pulsuz Çatdırılma"
+
+#: core/templates/index.html:711 product/templates/product-page.html:68
+msgid "free shipping world wide"
+msgstr "Dünya üzrə Pulsuz Çatdırılma"
+
+#: core/templates/index.html:740 product/templates/product-page.html:96
+msgid "service"
+msgstr "SERVİS"
+
+#: core/templates/index.html:741 product/templates/product-page.html:97
+msgid "online service for new customer"
+msgstr "yeni müştəri üçün onlayn xidmət"
+
+#: core/templates/index.html:767 product/templates/product-page.html:122
+msgid "festival offer"
+msgstr "FESTİVAL TƏKLİFİ"
+
+#: core/templates/index.html:768 product/templates/product-page.html:123
+msgid "new online special festival offer"
+msgstr "yeni onlayn xüsusi festival təklifi"
+
+#: core/templates/index.html:783
+msgid "Recent Story"
+msgstr "Son Hekayə"
+
+#: core/templates/index.html:784
+msgid "from the blog"
+msgstr "BLOGDAN"
+
+#: core/templates/partials/footer.html:13
+msgid "KNOW IT ALL FIRST!"
+msgstr "İLK ÖNCƏ SİZ BİLİN!"
+
+#: core/templates/partials/footer.html:14
+msgid "Never Miss Anything From Multikart By Signing Up To Our Newsletter."
+msgstr "Heç nəyi qaçırtmaq istəmirsinizsə Multikarta Abunə olun"
+
+#: core/templates/partials/footer.html:27
+msgid "subscribe"
+msgstr "ABUNƏ OL"
+
+#: core/templates/partials/footer.html:97
+#: core/templates/partials/navbar.html:14
+#: core/templates/partials/navbar.html:228
+msgid "Call Us"
+msgstr "Bizə zəng edin"
+
+#: core/templates/partials/navbar.html:13
+#: core/templates/partials/navbar.html:227
+msgid "Welcome to Our store Multikart"
+msgstr "Multikart mağazamıza xoş gəlmisiniz"
+
+#: core/templates/partials/navbar.html:26
+#: core/templates/partials/navbar.html:240
+msgid "View Profile"
+msgstr "Profil"
+
+#: core/templates/partials/navbar.html:27
+#: core/templates/partials/navbar.html:241
+msgid "Logout"
+msgstr "Çıxış"
+
+#: core/templates/partials/navbar.html:34
+#: core/templates/partials/navbar.html:248
+msgid "My Account"
+msgstr "Hesab"
+
+#: core/templates/partials/navbar.html:36
+#: core/templates/partials/navbar.html:250
+msgid "Login"
+msgstr "Daxil ol"
+
+#: core/templates/partials/navbar.html:37
+#: core/templates/partials/navbar.html:251
+msgid "Register"
+msgstr "Hesab yaradın"
+
+#: product/templates/product-page.html:160
+msgid "online payment"
+msgstr "onlayn ödəmə"
+
+#: product/templates/product-page.html:161
+msgid "Contrary to popular belief."
+msgstr "Məşhur İnancın əksinə"
+
+#: product/templates/product-page.html:291
+#: product/templates/product-page.html:293
+msgid "Off"
+msgstr "Endirim"
+
+#: product/templates/product-page.html:308
+msgid "select size"
+msgstr "ölçü seçin"
+
+#: product/templates/product-page.html:336
+msgid "quantity"
+msgstr "miqdar"
+
+#: product/templates/product-page.html:350
+msgid "add to cart"
+msgstr "karta əlavə et"
+
+#: product/templates/product-page.html:351
+msgid "buy now"
+msgstr "İNDİ AL"
+
+#: product/templates/product-page.html:353
+msgid "product details"
+msgstr "məhsulun xüsusiyəttləri"
+
+#: product/templates/product-page.html:357
+msgid "Share It"
+msgstr "Paylaş"
+
+#: product/templates/product-page.html:371
+#: product/templates/product-page.html:385
+msgid "Remove From WishList"
+msgstr "İstək siyahısından sil"
+
+#: product/templates/product-page.html:377
+#: product/templates/product-page.html:391
+msgid "Add To WishList"
+msgstr "İstək siyahısına əlavə et"
+
+#: product/templates/product-page.html:398
+msgid "Time Reminder"
+msgstr "Xatırladıcı"
+
+#: product/templates/product-page.html:420
+msgid "Description"
+msgstr "Ümumi təsvir"
+
+#: product/templates/product-page.html:425
+msgid "Details"
+msgstr "Detallar"
+
+#: product/templates/product-page.html:435
+msgid "Write Review"
+msgstr "Rəy Yaz"
+
+#: product/templates/product-page.html:463
+msgid "Color"
+msgstr "Rəng"
+
+#: product/templates/product-page.html:464
+msgid "Red"
+msgstr "Qırmızı"
+
+#: product/templates/product-page.html:468
+msgid "Crepe printed"
+msgstr ""
+
+#: product/templates/product-page.html:475
+msgid "Length"
+msgstr "Uzunluq"
+
+#: product/templates/product-page.html:476
+msgid "50 Inches"
+msgstr "50 inch"
+
+#: product/templates/product-page.html:479
+msgid "Size"
+msgstr "Ölçü"
+
+#: product/templates/product-page.html:513
+msgid "Review Title"
+msgstr "Başlıq"
+
+#: product/templates/product-page.html:519
+msgid "Review Text"
+msgstr "Mətn"
+
+#: product/templates/product-page.html:549
+msgid "related products"
+msgstr "Bənzər Məhsullar"
