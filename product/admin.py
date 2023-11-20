@@ -9,7 +9,7 @@ from .models import *
 class VariantInline(admin.TabularInline):
     model = Variant
     extra = 1
-    fields = ('color', 'is_main_variant')
+    fields = ('color', 'is_main_variant', 'is_main_image')
 
 
 class ImageInline(admin.TabularInline):
@@ -96,6 +96,8 @@ class CategoryAdmin(TranslationAdmin, DraggableMPTTAdmin):
     related_products_cumulative_count.short_description = 'Related products (in tree)'
 
 
+admin.site.register(Size)
+admin.site.register(Color)
 admin.site.register(Product, ProductsAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Variant, VariantsAdmin)

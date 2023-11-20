@@ -39,16 +39,23 @@
                             {% endif %}
                             <div class="form-group">
                                 <label for="email">email or username</label>
-                                <input name="emailorusername" type="text" class="form-control" placeholder="Email Or Username" required="">
+                                <input id="usernameOrEmail" name="emailorusername" type="text" class="form-control" placeholder="Email Or Username" required="">
                             </div>
                             <div class="form-group">
                                 <label for="review">Password</label>
-                                <input name="password" type="password" class="form-control" id="email" placeholder="Password" required="">
+                                <input id="password" name="password" type="password" class="form-control" placeholder="Password" required="">
 
                             </div>
-                            <button type="submit" style="border-right: 1px solid white;"class="btn btn-solid">Login</button>
+                            <button id="loginBtn" type="submit" style="border-right: 1px solid white;"class="btn btn-solid">Login</button>
                             <a href="{% url 'reset_password' %}" style="border-left: 1px solid white; "class="btn btn-solid">Forget password</a>
                         </form>
+                    </div>
+                    <div class="theme-card">
+                        <center>
+                            <h3 style="margin-top: 10px;">login with</h3>
+                            <a style="margin-right: 50px;" href="{% url 'social:begin' 'facebook' %}"><img width="50px" height="auto" src="{% static 'images/facebook-logo-icon-voronezh-russia-november-round-blue-color-164585774.webp' %}" alt=""></a>
+                            <a href="{% url 'social:begin' 'google-oauth2' %}"><img width="45px" height="auto" src="{% static 'images/google-icon-logo.svg' %}" alt=""></a>
+                        </center>
                     </div>
                 </div>
                 <div class="col-lg-6 right-login">
@@ -56,7 +63,7 @@
                     <div class="theme-card authentication-right">
                         <h6 class="title-font">Create A Account</h6>
                         <p>Sign up for a free account at our store. Registration is quick and easy. It allows you to be
-                            able to order from our shop. To start shopping click register.</p><a href="#"
+                            able to order from our shop. To start shopping click register.</p><a href="{% url 'account:register' %}"
                             class="btn btn-solid">Create an Account</a>
                     </div>
                 </div>
@@ -788,3 +795,7 @@
     <!-- tap to top end -->
 
 {% endblock  %}
+
+{% block js %}
+    <script src="{% static 'js/login-jwt-token.js' %}"></script>
+{% endblock %}

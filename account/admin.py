@@ -9,13 +9,17 @@ class WishListAdmin(admin.ModelAdmin):
     search_fields = ['title']
 
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ['get_title', 'user_id', 'username', 'title', 'text', 'product_photo']
-    list_display_links = ['get_title', 'product_photo']
+    list_display = ['get_title', 'user_id', 'username', 'title', 'text', 'rating', ]
+    list_display_links = ['get_title', ]
     readonly_fields = ['title', 'text']
     search_fields = ['title', 'text']
 
-admin.site.register(User)
+class UserAdmin(admin.ModelAdmin):
+    list_display = ['__str__', 'is_staff', 'is_superuser', 'id']
+    # list_display_links = ['title', 'product_photo']
+    # search_fields = ['title']
+
+admin.site.register(User, UserAdmin)
+admin.site.register(Profile)
 admin.site.register(WishList, WishListAdmin)
-admin.site.register(Vendor)
-admin.site.register(Cart)
 admin.site.register(Review, ReviewAdmin)

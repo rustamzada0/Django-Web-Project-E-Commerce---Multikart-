@@ -57,7 +57,7 @@
                                     <div>
                                         <h4>{% trans "welcome to fashion" %}</h4>
                                         <h1>{% trans "Men fashion" %}</h1>
-                                        <a href="#" class="btn btn-solid">{% trans "Shop Now" %}</a>
+                                        <a href="/product/categories/?category=men" class="btn btn-solid">{% trans "Shop Now" %}</a>
                                     </div>
                                 </div>
                             </div>
@@ -75,7 +75,7 @@
                                     <div>
                                         <h4>{% trans "welcome to fashion" %}</h4>
                                         <h1>{% trans "Women fashion" %}</h1>
-                                        <a href="#" class="btn btn-solid">{% trans "Shop Now" %}</a>
+                                        <a href="/product/categories/?category=women" class="btn btn-solid">{% trans "Shop Now" %}</a>
                                     </div>
                                 </div>
                             </div>
@@ -93,10 +93,10 @@
         <div class="container">
             <div class="row partition2">
                 <div class="col-md-6">
-                    <a href="#">
+                    <a href="/product/categories/?category=men">
                         <div class="collection-banner p-right text-center">
                             <div class="img-part">
-                                <img src="{{men_collection.image.url}}" class="img-fluid blur-up lazyload bg-img"
+                                <img src="https://c1.wallpaperflare.com/preview/518/369/227/web-design-coding-web-developing-macbook.jpg" class="img-fluid blur-up lazyload bg-img"
                                     alt="">
                             </div>
                             <div class="contain-banner">
@@ -109,10 +109,10 @@
                     </a>
                 </div>
                 <div class="col-md-6">
-                    <a href="#">
+                    <a href="/product/categories/?category=women">
                         <div class="collection-banner p-right text-center">
                             <div class="img-part">
-                                <img src="{{women_collection.image.url}}" class="img-fluid blur-up lazyload bg-img"
+                                <img src="https://c8.alamy.com/comp/2BMPEP2/beautiful-woman-on-a-yellow-background-with-bags-with-clothes-and-different-purchases-after-shopping-the-girl-is-happy-to-buy-many-things-web-banner-2BMPEP2.jpg" class="img-fluid blur-up lazyload bg-img"
                                     alt="">
                             </div>
                             <div class="contain-banner">
@@ -173,7 +173,7 @@
                                         <a href="/product/{{item.variant.get_absolute_url}}"><img src="{{item.image.url}}"
                                                 class="img-fluid blur-up lazyload bg-img" alt=""></a>
                                     </div>
-                                    <div class="cart-info cart-wrap">
+                                    <!-- <div class="cart-info cart-wrap">
                                         <button data-toggle="modal" data-target="#addtocart" title="Add to cart">
                                             <i class="ti-shopping-cart"></i>
                                         </button>
@@ -186,11 +186,15 @@
                                         <a href="compare.html" title="Compare">
                                             <i class="ti-reload" aria-hidden="true"></i>
                                         </a>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="product-detail">
-                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                                            class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                    <div class="rating">
+                                        {% for _ in "x"|ljust:item.variant.star %}
+                                                        ⭐
+                                        {% endfor %}
+                                        <!-- <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+                                            class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> -->
                                     </div>
                                     <a href="product-page(no-sidebar).html">
                                         <h6>{{item.variant.product.title}}</h6>
@@ -203,11 +207,11 @@
                                         <h4>${{item.variant.product.price}}
                                         </h4>
                                     {% endif %}
-                                    <ul class="color-variant">
+                                    <!-- <ul class="color-variant">
                                         <li class="bg-light0"></li>
                                         <li class="bg-light1"></li>
                                         <li class="bg-light2"></li>
-                                    </ul>
+                                    </ul> -->
                                 </div>
                             </div>
                         {% endif %}
@@ -223,7 +227,7 @@
     <!-- Parallax banner -->
     <section class="p-0">
         <div class="full-banner parallax text-center p-left">
-            <img src="{{parallax.image.url}}" alt="" class="bg-img blur-up lazyload">
+            <img src="https://img.freepik.com/premium-photo/attractive-woman-with-shop-bags-yellow-background_185193-68863.jpg?w=2000" alt="" class="bg-img blur-up lazyload">
             <div class="container">
                 <div class="row">
                     <div class="col">
@@ -253,7 +257,7 @@
                         <ul class="tabs tab-title">
                             <li class="current"><a href="tab-4">{% trans "New Products" %}</a></li>
                             <li class=""><a href="tab-5">{% trans "Featured Products" %}</a></li>
-                            <li class=""><a href="tab-6">{% trans "Best Sellers" %}</a></li>
+                            <!-- <li class=""><a href="tab-6">{% trans "Best Sellers" %}</a></li> -->
                         </ul>
                         <div class="tab-content-cls">
                             <div id="tab-4" class="tab-content active default">
@@ -282,7 +286,7 @@
                                                             src="{{item.image.url}}"
                                                             class="img-fluid blur-up lazyload bg-img" alt=""></a>
                                                 </div>
-                                                <div class="cart-info cart-wrap">
+                                                <!-- <div class="cart-info cart-wrap">
                                                     <button data-toggle="modal" data-target="#addtocart"
                                                         title="Add to cart"><i class="ti-shopping-cart"></i></button> <a
                                                         href="javascript:void(0)" title="Add to Wishlist"><i
@@ -290,12 +294,17 @@
                                                         data-toggle="modal" data-target="#quick-view" title="Quick View"><i
                                                             class="ti-search" aria-hidden="true"></i></a> <a
                                                         href="compare.html" title="Compare"><i class="ti-reload"
-                                                            aria-hidden="true"></i></a></div>
+                                                            aria-hidden="true"></i></a></div> -->
                                             </div>
                                             <div class="product-detail">
-                                                <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+                                                <div class="rating">
+                                                    {% for _ in "x"|ljust:item.variant.star %}
+                                                        ⭐
+                                                    {% endfor %}
+                                                    <!-- <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
                                                         class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                                                        class="fa fa-star"></i></div>
+                                                        class="fa fa-star"></i> -->
+                                                    </div>
                                                 <a href="product-page(no-sidebar).html">
                                                     <h6>{{item.variant.title}}</h6>
                                                 </a>
@@ -307,11 +316,11 @@
                                                     <h4>${{item.variant.product.price}}
                                                     </h4>
                                                 {% endif %}
-                                                <ul class="color-variant">
+                                                <!-- <ul class="color-variant">
                                                     <li class="bg-light0"></li>
                                                     <li class="bg-light1"></li>
                                                     <li class="bg-light2"></li>
-                                                </ul>
+                                                </ul> -->
                                             </div>
                                         </div>
                                     {% endif %}
@@ -344,20 +353,28 @@
                                                             class="img-fluid blur-up lazyload bg-img" alt=""></a>
                                                 </div>
                                                 <div class="cart-info cart-wrap">
-                                                    <button data-toggle="modal" data-target="#addtocart"
-                                                        title="Add to cart"><i class="ti-shopping-cart"></i></button> <a
-                                                        href="javascript:void(0)" title="Add to Wishlist"><i
-                                                            class="ti-heart" aria-hidden="true"></i></a> <a href="#"
+                                                    <!-- <button data-toggle="modal" data-target="#addtocart"
+                                                        title="Add to cart"><i class="ti-shopping-cart"></i>
+                                                    </button> -->
+                                                    <!-- <a href="javascript:void(0)" title="Add to Wishlist"><i
+                                                            class="ti-heart" aria-hidden="true"></i></a> -->
+                                                     <!-- <a href="#"
                                                         data-toggle="modal" data-target="#quick-view" title="Quick View"><i
                                                             class="ti-search" aria-hidden="true"></i></a> <a
                                                         href="compare.html" title="Compare"><i class="ti-reload"
-                                                            aria-hidden="true"></i></a></div>
+                                                            aria-hidden="true"></i></a> -->
+                                                </div>
                                             </div>
 
                                             <div class="product-detail">
-                                                <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+                                                <div class="rating">
+                                                    {% for _ in "x"|ljust:item.variant.star %}
+                                                        ⭐
+                                                    {% endfor %}
+                                                    <!-- <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
                                                         class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                                                        class="fa fa-star"></i></div>
+                                                        class="fa fa-star"></i> -->
+                                                </div>
                                                 <a href="product-page(no-sidebar).html">
                                                     <h6>{{item.variant.product.title}}</h6>
                                                 </a>
@@ -369,17 +386,17 @@
                                                     <h4>${{item.variant.product.price}}
                                                     </h4>
                                                 {% endif %}
-                                                <ul class="color-variant">
+                                                <!-- <ul class="color-variant">
                                                     <li class="bg-light0"></li>
                                                     <li class="bg-light1"></li>
                                                     <li class="bg-light2"></li>
-                                                </ul>
+                                                </ul> -->
                                             </div>
                                         </div>
                                     {% endfor %}
                                 </div>
                             </div>
-                            <div id="tab-6" class="tab-content">
+                            <!-- <div id="tab-6" class="tab-content">
                                 <div class="no-slider row">
                                     <div class="product-box">
                                         <div class="img-wrapper">
@@ -686,7 +703,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -1790,7 +1807,7 @@
     
         <!-- exitintent jquery-->
         <script src="{% static 'js/jquery.exitintent.js' %}"></script>
-        <script src="{% static 'js/exit.js' %}"></script>
+        <!-- <script src="{% static 'js/exit.js' %}"></script> -->
         <!-- popper js-->
         <script src="{% static 'js/popper.min.js' %}"></script>
     
@@ -1814,8 +1831,8 @@
     
         <!-- Theme js-->
         <script src="{% static 'js/script.js' %}"></script>
-    
-        <script>
+
+        <!-- <script>
             $(window).on('load', function () {
                 setTimeout(function () {
                     $('#exampleModal').modal('show');
@@ -1828,4 +1845,4 @@
             function closeSearch() {
                 document.getElementById("search-overlay").style.display = "none";
             }
-        </script>
+        </script> -->

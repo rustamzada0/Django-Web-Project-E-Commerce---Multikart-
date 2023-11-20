@@ -7,16 +7,31 @@ services:
     image: postgres
     restart: always
     ports:
-      - 5489:5432
+      - 5432:5432
     volumes:
       - ./database:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: 12345678
       POSTGRES_USER: root
       POSTGRES_DB: multikart
+  
+  # web:
+  #   container_name: multikart
+  #   build: .
+  #   ports:
+  #     - 8000:8000
+  #   depends_on:
+  #     - "db"
+  #     - "redis"
 
   adminer:
     image: adminer
     restart: always
     ports:
       - 8081:8080
+
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+      

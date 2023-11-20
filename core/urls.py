@@ -12,8 +12,7 @@ urlpatterns = [
     path('search/', search, name='search'),
     path('faq/', faq, name='faq'),
     path('about-page/', about_page, name='about-page'),
-    path('error/', error, name='error')
+    path('error/', error, name='error'),
 ]
 
-#URL TAMAM
 urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

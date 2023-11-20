@@ -1,30 +1,17 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
+from .forms import ContactForm
 from product.models import *
 from .models import *
 
 # Create your views here.
 def home(request):
     items = Image.objects.filter(variant__is_main_variant=True).filter(is_main=True)
-
-    for i in items:
-        print(i.variant.new_status)
-
-    blogs_images = MainPhotos.objects.filter(blog=True)
-    insta_images = MainPhotos.objects.filter(insta=True)
     main_photos_men = MainPhotos.objects.get(id=1)
     main_photos_women = MainPhotos.objects.get(id=2)
-    men_collection = MainPhotos.objects.get(id=3)
-    women_collection = MainPhotos.objects.get(id=4)
-    parallax = MainPhotos.objects.get(id=5)
-
+    
     context = {
-        'women_collection':women_collection,
-        'men_collection':men_collection,
         'main_photos_men':main_photos_men,
         'main_photos_women':main_photos_women,
-        'parallax': parallax,
-        'blogs_images': blogs_images,
-        'insta_images': insta_images,
 
         'items': items,
     }
@@ -33,7 +20,19 @@ def home(request):
 
 
 def contact(request):
-    return render(request, 'contact.html')
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            message = form.save(commit=False)
+            message.save()
+    else:
+        form = ContactForm()
+
+    context = {
+        'form': form
+    }
+
+    return render(request, 'contact.html', context=context)
 
 
 def search(request):
@@ -55,5 +54,5 @@ def about_page(request):
     return render(request, 'about-page.html')
 
 
-def error(request):
+def error(request, exception):
     return render(request, '404.html')

@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.http import Http404
 from django.shortcuts import get_object_or_404
-from core.models import MainPhotos
-from django.views.generic.base import TemplateView
+from urllib.parse import urlparse
+from django.db.models import F
+from django.db.models.functions import Random
 from .models import *
 from account.models import *
 from .forms import ReviewForm
@@ -37,41 +38,16 @@ from .forms import ReviewForm
 
 
 def category_page(request):
-    # categories = Category.objects.filter(slug = path.split('/')[-1])
-    # for category in categories:
-    #     if category.get_absolute_url() == f"{path}":
-    #         category = category
-    #         break
-    
-    # if category.parent:
-    #     items = Image.objects.filter(variant__product__category = category).filter(variant__is_main_variant=True).filter(is_main=True)
-    # else:
-    #     child_categories1 = []
-    #     cats = Category.objects.all()
-    #     for cat in cats:
-    #         if cat.parent:
-    #             if category.title == cat.title:
-    #                 child_categories1.append(cat)
-    #     child_categories2 = Category.objects.filter(parent=category)
+    url = request.build_absolute_uri()
+    parsed_url = urlparse(url)
+    query_string = parsed_url.query
 
-    #     items_list = []
-    #     items = []
+    new_items = Image.objects.filter(variant__is_main_variant=True,is_main=True,variant__new_status=True).order_by(Random()).annotate(dummy=F('id'))[:2]
 
-    #     for cat in child_categories1:
-    #         items_list.append(Image.objects.filter(variant__product__category = cat).filter(variant__is_main_variant=True).filter(is_main=True))
-    #     for cat in child_categories2:
-    #         items_list.append(Image.objects.filter(variant__product__category = cat).filter(variant__is_main_variant=True).filter(is_main=True))
-    #     for item_list in items_list:
-    #         for item in item_list:
-    #             items.append(item)
-
-    colors = Color.objects.all()
-    menu = MainPhotos.objects.get(id=6)
 
     context = {
-        # 'items': items,
-        'menu': menu,
-        'colors': colors
+        'query_string': query_string,
+        'new_items': new_items
     }
 
     return render(request , "category-page.html", context)
@@ -80,6 +56,7 @@ def category_page(request):
 def product_page(request, path, slug):
     # Product
     variant = get_object_or_404(Variant, slug=slug)
+    print(variant.star())
     if not variant.get_absolute_url() == f"{path}/{slug}":
         raise Http404
     images = Image.objects.filter(variant=variant).all()
@@ -109,7 +86,8 @@ def product_page(request, path, slug):
             review.save()
     else:
         form = ReviewForm()
-    # End Review
+    
+    reviews = Review.objects.filter(variant=variant)
 
     # Related Products
     is_main_variant = Variant.objects.filter(product=variant.product).filter(is_main_variant=True).first()
@@ -118,12 +96,16 @@ def product_page(request, path, slug):
     # End Related Products
 
     product_variant_list = Variant.objects.filter(product=variant.product)
+    new_items = Image.objects.filter(variant__is_main_variant=True,is_main=True,variant__new_status=True).order_by(Random()).annotate(dummy=F('id'))[:3]
+
 
     context = {
         'variant': variant,
+        'reviews': reviews,
         'images': images,
         'variants': variants,
         'related_items': related_items,
+        'new_items':new_items,
         'item_': item_,
         'product_variant_list': product_variant_list,
         'form': form

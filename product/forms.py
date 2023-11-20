@@ -9,7 +9,8 @@ class ReviewForm(ModelForm):
         model = Review
 
         fields = ('title',
-                  'text')
+                  'text',
+                'rating')
 
         widgets = {
            "title": forms.TextInput(attrs={

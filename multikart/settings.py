@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    "jazzmin",
     'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -45,26 +46,41 @@ INSTALLED_APPS = [
     'product.apps.ProductConfig',
     'account.apps.AccountConfig',
     'payment',
+
+    'social_django',
     'mptt',
     'rest_framework',
     'django_filters',
     'rest_framework_simplejwt',
-    'corsheaders'
+    'corsheaders',
+    'django_celery_beat'
 ]
 
 # REST_FRAMEWORK = {
 #     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 # }
 
+# REST_FRAMEWORK = {
+#    'DEFAULT_AUTHENTICATION_CLASSES': (
+#        'rest_framework.authentication.TokenAuthentication',
+#    ),
+#    'DEFAULT_PERMISSION_CLASSES': (
+#         'rest_framework.permissions.IsAdminUser'
+#    ),
+# }
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'social_django.middleware.SocialAuthExceptionMiddleware'
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -82,10 +98,20 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 WSGI_APPLICATION = 'multikart.wsgi.application'
 
@@ -93,14 +119,18 @@ WSGI_APPLICATION = 'multikart.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+import time
+
+# time.sleep(2)
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME':  'multikart',
         'USER': 'root',
         'PASSWORD': '12345678',
-        'HOST':'LOCALHOST',
-        'PORT':'5489'
+        'HOST':'localhost',
+        'PORT':'5432'
     }
 }
 
@@ -133,13 +163,24 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
+USE_L10N = True
+
 USE_TZ = True
+
+
+
+LANGUAGES = (
+    ('en', ('English')),
+    ('az', ('Azerbaijan')),
+)
+
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/' # app'da
+STATIC_ROOT = os.path.join(BASE_DIR, '/static')
 STATICFILES_DIRS = [
     BASE_DIR / "static" # project'de (çöldə)
     # "/var/www/static/",
@@ -152,12 +193,6 @@ LOCALE_PATHS = [
     BASE_DIR / 'locale/',
 ]
 
-LANGUAGES = (
-    ('en', ('English')),
-    ('az', ('Azerbaijan')),
-
-)
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -166,6 +201,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'account.User'
 
 LOGIN_URL = '/account/login'
+LOGOUT_URL = '/account/logout'
+LOGIN_REDIRECT_URL = '/home'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '722735383064138'  
+SOCIAL_AUTH_FACEBOOK_SECRET = '2b1d1e45de47a4eb6860f33b70985638' 
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '27435170404-8n2ubtq27beu3e731u3bsd6t9jocdcnv.apps.googleusercontent.com'  
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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' 
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
@@ -182,6 +225,8 @@ EMAIL_HOST_PASSWORD = "ejuv xzso zpaq optd"
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
@@ -225,3 +270,13 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }
+
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51OBLfsH1R08EYzAmPCx7Ise6Rd00ZFn98LsWhZV2fgvQNJyo4D3dvgv3eBykfhHbcIK8y61d4XtTJwYkFlShg2hV00mvEBO1ju'
+STRIPE_SECRET_KEY = 'sk_test_51OBLfsH1R08EYzAm6d6bZRsskKoO0MboWZV8TxTdvy1IRyAw4ChjRoHB2sMSnNJnLUgqSXvfTzA1IDIAJIQtqQMM00CG3rmbh7'
+
+CELERY_BROKER_URL = "localhost://db:6379"
+CELERY_RESULT_BACKEND = "localhost://db:6379"
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Baku'

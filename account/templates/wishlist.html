@@ -51,17 +51,17 @@
                                         <a href="/product/{{image.variant.get_absolute_url}}">{{image.variant.title}}</a>
                                     </td>
                                     <td>
-                                        {% if image.variant.actual_price < image.variant.price %}
+                                        {% if image.variant.actual_price < image.variant.product.price %}
                                             <h2>${{image.variant.actual_price}}
-                                            <del>${{image.variant.price}}</del>
+                                            <del>${{image.variant.product.price}}</del>
                                             </h2>
                                         {% else %}
-                                            <h2>${{image.variant.price}}
+                                            <h2>${{image.variant.product.price}}
                                             </h2>
                                         {% endif %}
                                     </td>
                                     <td>
-                                        {% if image.variant.general_stock == True %}
+                                        {% if image.variant.product.general_stock == True %}
                                             <p>In Stock</p>
                                         {% else %}
                                             <p>Out of Stock</p>
@@ -69,7 +69,6 @@
                                     </td>
                                     <td>
                                         <a href="{% url 'account:remove_item' image.variant.id %}" class="icon mr-3"><i class="ti-close"></i> </a>
-                                        <a href="#" class="cart"><i class="ti-shopping-cart"></i></a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -78,8 +77,8 @@
                 </div>
             </div>
             <div class="row wishlist-buttons">
-                <div class="col-12"><a href="#" class="btn btn-solid">continue shopping</a> <a href="#"
-                        class="btn btn-solid">check out</a></div>
+                <div class="col-12"><a href="/home" class="btn btn-solid">continue shopping</a>
+                </div>
             </div>
         </div>
     </section>

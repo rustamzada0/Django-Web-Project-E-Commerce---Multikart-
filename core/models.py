@@ -51,6 +51,9 @@ class Contact(AbstractModel):
 class Subscriber(AbstractModel):
     email = CharField(max_length=50)
 
+    def __str__(self) -> str:
+        return self.email
+
 
 class MainPhotos(AbstractModel):
     title = CharField(max_length=255, null=True, blank=True)

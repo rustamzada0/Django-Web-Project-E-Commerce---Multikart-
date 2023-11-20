@@ -13,14 +13,12 @@ from django.utils.encoding import force_str
 from django.utils.http import urlsafe_base64_decode
 from django.utils.translation import gettext_lazy as _
 from .tokens import account_activation_token
-from product.models import *
-from .models import *
-from .forms import *
+from .forms import RegisterForm, ProfileForm
+from product.models import Variant, Image
+from .models import User, WishList
+from payment.models import Cart
 
 # Create your views here.
-def cart(request):
-    return render(request, 'cart.html')
-
 
 # def forget_pwd(request):
 #     email = request.GET.get('email', "")
@@ -52,14 +50,31 @@ def sign_in(request):
             if user is not None: 
                 login(request,user)
                 messages.add_message(request, messages.SUCCESS, f"{('Welcome')} {str(username).upper()}!")
-                return redirect(reverse_lazy("account:profile"))
+                return redirect(reverse_lazy("core:home"))
             else:  error=('Email or username or password wrong')
             
         return render(request,'login.html',  context={'error':error})
 
 
+@login_required()
 def profile(request):
-    return render(request, 'profile.html')
+    if request.method == 'POST':
+
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.country = request.POST.get('selected_country')
+            profile.save()
+            return redirect(reverse_lazy("core:home"))
+    else:
+        form = ProfileForm()
+
+    
+    context = {
+        'form': form
+    }
+
+    return render(request, 'profile.html', context)
 
 
 def sign_up(request):
@@ -74,6 +89,8 @@ def sign_up(request):
                 user.set_password(form.cleaned_data['password'])
                 user.is_active = False
                 user.save()
+
+                cart = Cart.objects.create(user=user)
                 send_confirmation_mail(user=user, current_site=get_current_site(request))
                 # current_site = get_current_site(request)
                 # send_activate_link(user,current_site.domain,urlsafe_base64_encode(force_bytes(user.pk)), account_activation_token.make_token(user),)
@@ -171,6 +188,6 @@ def add_item(request, variant_id):
 
 def logout_request(request):
     logout(request)
-    return redirect('core:home')
+    return redirect('account:login')
 
 

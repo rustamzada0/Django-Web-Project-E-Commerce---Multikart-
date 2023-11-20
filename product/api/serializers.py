@@ -12,7 +12,7 @@ class GetCategorySerializer(serializers.ModelSerializer):
              "parent",
              "slug"
         )
-
+    
 
 class GetProductSerializer(serializers.ModelSerializer):
     variant = serializers.SerializerMethodField()
@@ -26,7 +26,9 @@ class GetProductSerializer(serializers.ModelSerializer):
             "desc_en",
             "video",
             "slug",
-            "variant"
+            "variant",
+            "category",
+            "vendor"
         )
 
     def get_variant(self, obj):
@@ -57,6 +59,8 @@ class GetOffProductVariantSerializer(serializers.ModelSerializer):
 
 
 class GetOffVariantProductSerializer(serializers.ModelSerializer):
+    category = GetCategorySerializer()
+    vendor = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
@@ -66,15 +70,34 @@ class GetOffVariantProductSerializer(serializers.ModelSerializer):
             "title_en",
             "desc_en",
             "video",
-            "slug"
+            "slug",
+            "category",
+            "vendor"
         )
+        
+    def get_vendor(self, obj):
+        return obj.vendor.name
+
+
+class GetOptionSerializer(serializers.ModelSerializer):
+    size = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Option
+        fields = (
+            "stock",
+            "size"
+        )
+
+    def get_size(self, obj):
+        return obj.size.title
 
 
 class GetVariantSerializer(serializers.ModelSerializer):
     product = GetOffVariantProductSerializer()
     get_absolute_url = serializers.SerializerMethodField()
     color = serializers.SerializerMethodField()
-
+    option = serializers.SerializerMethodField()
 
     class Meta:
         model = Variant
@@ -85,7 +108,10 @@ class GetVariantSerializer(serializers.ModelSerializer):
             "slug",
             "color",
             "product",
-            "get_absolute_url"
+            "is_main_variant",
+            "is_main_image",
+            "get_absolute_url",
+            "option"
         )
         
     def get_get_absolute_url(self, obj):
@@ -93,6 +119,10 @@ class GetVariantSerializer(serializers.ModelSerializer):
     
     def get_color(self, obj):
         return obj.color.title
+    
+    def get_option(self, obj):
+        serializer = GetOptionSerializer(obj.related_option.all(), context=self.context, many=True)
+        return serializer.data
 
 
 class GetImageSerializer(serializers.ModelSerializer):

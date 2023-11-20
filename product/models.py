@@ -1,20 +1,21 @@
 from django.db import models
 from django.db.models.fields import CharField, TextField, FloatField, SlugField
 from django.db.models.fields.files import ImageField
-from django.db.models.fields.related import ForeignKey, ManyToManyField
+from django.db.models.fields.related import ForeignKey
 from core.models import AbstractModel
 from django.utils.text import slugify
 from django.utils import translation
 from django.utils.safestring import mark_safe
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
+from account.models import Review
 
 # Create your models here.
 
 class Category(MPTTModel):
     title = CharField(max_length=50)
     image = ImageField(upload_to='category_media/', null=True, blank=True,)
-    parent = TreeForeignKey('self', null=True, blank=True, related_name='child', on_delete=models.CASCADE)
+    parent = TreeForeignKey('self', null=True, blank=True, related_name='childs', on_delete=models.CASCADE)
     slug = models.SlugField(null=True, blank=True)
     
     def __str__(self):
@@ -43,7 +44,8 @@ class Category(MPTTModel):
         order_insertion_by = ['title']
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
+        self.slug = slugify(self.__str__())
+
         super(Category, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
@@ -84,8 +86,8 @@ class Product(AbstractModel):
     title = CharField(max_length=100, unique=True)
     price = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
     general_stock = models.BooleanField(null=True, blank=True)
-    product_detail = TextField()
-    desc = TextField()
+    product_detail = TextField(null=True, blank=True)
+    desc = TextField(null=True, blank=True)
     video = CharField(max_length=100, null=True, blank=True)
     category = ForeignKey(Category, on_delete=models.CASCADE, related_name="related_product")
     vendor = ForeignKey('Vendor', on_delete=models.CASCADE)
@@ -121,7 +123,9 @@ class Variant(AbstractModel):
     actual_price=models.DecimalField(null=True, blank=True, max_digits=10, decimal_places=2)
     discount_time=models.DateTimeField(auto_now_add=False, null=True, blank=True)
     is_main_variant = models.BooleanField(default=False)
+    is_main_image = ImageField(upload_to='product_media/', null=True, blank=True)
     slug = SlugField(null=True, blank=True)
+    rating = models.IntegerField(null=True, blank=True, default=1)
 
     def __str__(self):
         return f"{self.title}"
@@ -140,7 +144,7 @@ class Variant(AbstractModel):
 
         if self.is_main_variant:
                 self.product.slug = self.slug
-                self.product.save() 
+                self.product.save()
 
         super(Variant, self).save(*args, **kwargs)
 
@@ -151,7 +155,19 @@ class Variant(AbstractModel):
 
     def get_absolute_url(self):
         return f"{self.product.category.get_absolute_url()}/{self.slug}"
-
+    
+    def star(self):
+        reviews = Review.objects.filter(variant=self)
+        toti = 0
+        period = 0
+        for rev in reviews:
+            toti += rev.rating
+            period += 1
+        if period == 0:
+            period = 1
+        result = round(toti / period)
+        
+        return result
 
 
 class Image(AbstractModel):
